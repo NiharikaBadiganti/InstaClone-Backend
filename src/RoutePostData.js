@@ -1,18 +1,24 @@
 const postRouter = require('express').Router();
+var cors = require('cors')
+app.use(cors());
 const dotenv = require('dotenv');
 dotenv.config();
-const cors = require('cors');
-postRouter.use(cors());
 
 const multer = require('multer');
 
 const postModel = require('../src/ModelPostData');
 const bodyparser = require('body-parser');
-const { response } = require('express');
+// const { response } = require('express');
 
 postRouter.use(bodyparser.json());
 
 var cloudinary = require('cloudinary').v2;
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
 cloudinary.config({
     cloudName : process.env.cloudName,
@@ -31,8 +37,8 @@ postRouter.get("/postview",async(req,res)=>
 {
     try
     {
-        const result = await postModel.find().sort({_id:-1});
-        res.json(result)
+        let result = await postModel.find().sort({_id:-1});
+        res.json(result);
     }
     catch(error)
     {
@@ -50,9 +56,9 @@ postRouter.post('/newpost',uploadFile.single("imageFile") , async(req,res)=>
         let postedDate = new Date();
         const dataObject = 
         {
-            userName : req.fields.author,
-            location : req.fields.address,
-            description : req.fields.description,
+            userName : req.body.author,
+            location : req.body.address,
+            description : req.body.description,
             postedDate : `${postedDate.getDate()} - ${postedDate.getMonth()} - ${postedDate.getFullYear}`,
             imageFile : imageUrl.url,
         }

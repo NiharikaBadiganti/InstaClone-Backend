@@ -1,4 +1,5 @@
 const postRouter = require('express').Router();
+const app = require("express");
 var cors = require('cors')
 app.use(cors());
 const dotenv = require('dotenv');

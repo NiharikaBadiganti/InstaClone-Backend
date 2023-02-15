@@ -7,7 +7,7 @@ const db = 'mongodb+srv://Niharika:password@cluster0.gfgtat0.mongodb.net/?retryW
 mongoose
     .connect(db, { 
         useNewUrlParser: true,
-        useCreateIndex: true
+        useUnifiedTopology: true,
       })
     .then(() => console.log('MongoDB connected...'))
     .catch(err => console.log(err));

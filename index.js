@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 dotenv.config();
-const db = 'mongodb+srv://Niharika:password@cluster0.gfgtat0.mongodb.net/?retryWrites=true&w=majority'
+const db = 'mongodb+srv://Niharika:Niharika@cluster0.gfgtat0.mongodb.net/?retryWrites=true&w=majority'
 mongoose
     .connect(db, { 
         useNewUrlParser: true,

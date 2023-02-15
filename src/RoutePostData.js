@@ -34,7 +34,7 @@ const storage = multer.diskStorage({
 
 const uploadFile = multer({storage:storage})
 
-postRouter.get("/PostView",async(req,res)=>
+postRouter.get("/postview",async(req,res)=>
 {
     try
     {
@@ -49,7 +49,7 @@ postRouter.get("/PostView",async(req,res)=>
     }
 })
 
-postRouter.post('/NewPost',uploadFile.single("imageFile") , async(req,res)=>
+postRouter.post('/newpost',uploadFile.single("imageFile") , async(req,res)=>
 {
     try
     {

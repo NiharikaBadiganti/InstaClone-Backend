@@ -53,7 +53,7 @@ postRouter.post('/newpost',uploadFile.single("imageFile") , async(req,res)=>
 {
     try
     {
-        const imageUrl = await cloudinary.uploader.fileUpload(req.files.file.path);
+        const imageUrl = await cloudinary.uploader.upload(req.file.path);
         let postedDate = new Date();
         const dataObject = 
         {

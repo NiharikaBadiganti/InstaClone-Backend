@@ -1,5 +1,5 @@
 const postRouter = require('express').Router();
-const app = require("express");
+// const app = require("express");
 var cors = require('cors')
 postRouter.use(cors());
 const dotenv = require('dotenv');
@@ -34,7 +34,7 @@ const storage = multer.diskStorage({
 
 const uploadFile = multer({storage:storage})
 
-postRouter.get("/allposts",async(req,res)=>
+postRouter.get("/postview",async(req,res)=>
 {
     try
     {
@@ -49,16 +49,16 @@ postRouter.get("/allposts",async(req,res)=>
     }
 })
 
-postRouter.post('/postnew',uploadFile.single("imageFile") , async(req,res)=>
+postRouter.post('/newpost',uploadFile.single("imageFile") , async(req,res)=>
 {
     try
     {
-        const imageUrl = await cloudinary.uploader.fileUpload(req.file.path);
+        const imageUrl = await cloudinary.uploader.fileUpload(req.files.file.path);
         let postedDate = new Date();
         const dataObject = 
         {
-            userName : req.body.author,
-            location : req.body.address,
+            userName : req.body.Author,
+            location : req.body.location,
             description : req.body.description,
             postedDate : `${postedDate.getDate()} - ${postedDate.getMonth()} - ${postedDate.getFullYear}`,
             imageFile : imageUrl.url,
